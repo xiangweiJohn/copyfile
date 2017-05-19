@@ -12,20 +12,20 @@ import java.util.Scanner;
 public class CooyFile {
 
 	/**
-	 * ½«Ô­ÎÄ¼ş¼ĞÏÂµÄÖ¸¶¨ÎÄ¼ş¸´ÖÆµ½Ö¸¶¨ÎÄ¼şÂ·¾¶ÏÂ
+	 * å°†åŸæ–‡ä»¶å¤¹ä¸‹çš„æŒ‡å®šæ–‡ä»¶å¤åˆ¶åˆ°æŒ‡å®šæ–‡ä»¶è·¯å¾„ä¸‹
 	 * @throws IOException 
 	 */
 	public static void main(String[] args) throws IOException {
 		
-		System.out.println("ÇëÊäÈëÔ´ÎÄ¼ş¼ĞÂ·¾¶:");
+		System.out.println("è¯·è¾“å…¥æºæ–‡ä»¶å¤¹è·¯å¾„:");
 		File src = getFilePath();
-		System.out.println("ÇëÊäÈëĞèÒªÄ¿µÄµØÎÄ¼ş¼ĞÂ·¾¶:");
+		System.out.println("è¯·è¾“å…¥éœ€è¦ç›®çš„åœ°æ–‡ä»¶å¤¹è·¯å¾„:");
 		File dest = getFilePath();
 		
 		String suffix = getFilesuffix();
 		
 		if (src.equals(dest)) {
-			System.out.println("Ô´ÎÄ¼ş¼ĞÂ·¾¶ÓëÄ¿µÄµØÎÄ¼ş¼ĞÂ·¾¶ÏàÍ¬");
+			System.out.println("æºæ–‡ä»¶å¤¹è·¯å¾„ä¸ç›®çš„åœ°æ–‡ä»¶å¤¹è·¯å¾„ç›¸åŒ");
 		} else {
 			srcCopy2dest(src,dest,suffix);
 		}
@@ -33,42 +33,14 @@ public class CooyFile {
 		//demo1();
 	}
 
-	public static void demo1() throws IOException, FileNotFoundException {
-		String name1 = "day21note.md";
-		String name2 = "day21note.md";
-		File file1 = new File(name1);
-		file1.createNewFile();
-		System.out.println(file1);
-		System.out.println(file1.exists());
-		File file2 = new File(name2);
-		System.out.println(file2);
-		file2.createNewFile();
-		System.out.println(file2.exists());
-		
-		System.out.println(file1 == file2);
-		
-		FileInputStream fis1 = new FileInputStream(file1);
-		System.out.println(fis1);
-		FileInputStream fis2 = new FileInputStream(file2);
-		System.out.println(fis2);
-		
-		System.out.println(file1.getAbsolutePath());
-		System.out.println(file2.getAbsolutePath());
-		System.out.println(file1.getAbsolutePath() == file2.getAbsolutePath());//ËäÈ»file1ºÍfile2µÄ¾ø¶ÔÂ·¾¶ÏàÍ¬,µ«ÊÇÓÃ==±È½ÏµÄÊÇµØÖ·Öµ
-		System.out.println(file1.getAbsolutePath().equals(file2.getAbsolutePath()));
-		System.out.println("D:\\Ë«Ôª¿ÎÌÃ\\copyfile\\day21note.md" == "D:\\Ë«Ôª¿ÎÌÃ\\copyfile\\day21note.md");
-	}
-	
-	
-	
 	public static String getFilesuffix() {
-		System.out.println("ÇëÊäÈëÄãÒª¿½±´µÄÎÄ¼şºó×º:");
+		System.out.println("è¯·è¾“å…¥ä½ è¦æ‹·è´çš„æ–‡ä»¶åç¼€:");
 		Scanner sc = new Scanner(System.in);
 		while (true) {
-			String suffix = sc.nextLine();//Óöµ½\r\n¾ÍÅĞ¶ÏÊäÈë½áÊø,µ«ÊÇ²¢²»»á°Ñ\r\n×÷Îª×Ö·û¸³¸øsuffix
+			String suffix = sc.nextLine();//é‡åˆ°\r\nå°±åˆ¤æ–­è¾“å…¥ç»“æŸ,ä½†æ˜¯å¹¶ä¸ä¼šæŠŠ\r\nä½œä¸ºå­—ç¬¦èµ‹ç»™suffix
 			String regex = "\\s+";
-			if (suffix.isEmpty() || suffix.matches(regex)) {//µ±ÄãÖ®ÊäÈë»Ø³µÊ±,suffixÏàµ±ÓÚÎª¿Õ,Á¬¿Õ°××Ö·û¶¼²»ÊÇ!
-				System.out.println("ÄãÊäÈëµÄÎÄ¼şºó×ºÎª¿Õ,ÇëÔÙ´ÎÊäÈë");
+			if (suffix.isEmpty() || suffix.matches(regex)) {//å½“ä½ ä¹‹è¾“å…¥å›è½¦æ—¶,suffixç›¸å½“äºä¸ºç©º,è¿ç©ºç™½å­—ç¬¦éƒ½ä¸æ˜¯!
+				System.out.println("ä½ è¾“å…¥çš„æ–‡ä»¶åç¼€ä¸ºç©º,è¯·å†æ¬¡è¾“å…¥");
 			} else {
 				return suffix;
 			} 	
@@ -78,7 +50,7 @@ public class CooyFile {
 	public static void srcCopy2dest(File src, File dest,String suffix) throws IOException {
 		File[] subFiles = src.listFiles();
 		for (File subFile : subFiles) {
-			if(!subFile.getAbsolutePath().equals(dest.getAbsolutePath())) {//Èç¹ûÄ¿µÄµØÎÄ¼ş¼ĞÊÇÔÚÔ´ÎÄ¼şÏÂ¾Í²»¶ÔÆä½øĞĞ±éÀú
+			if(!subFile.getAbsolutePath().equals(dest.getAbsolutePath())) {//å¦‚æœç›®çš„åœ°æ–‡ä»¶å¤¹æ˜¯åœ¨æºæ–‡ä»¶ä¸‹å°±ä¸å¯¹å…¶è¿›è¡Œéå†
 				if (subFile.isFile() && subFile.getName().endsWith(suffix)) {
 					File file = new File(dest,subFile.getName());
 					file.createNewFile();
@@ -113,9 +85,9 @@ public class CooyFile {
 			String line = sc.nextLine();
 			File file = new File(line);
 			if (!file.exists()) {
-				System.out.println("ÄúÊäÈëµÄÎÄ¼ş¼ĞÂ·¾¶²»´æÔÚ,ÇëÖØĞÂÊäÈë:");
+				System.out.println("æ‚¨è¾“å…¥çš„æ–‡ä»¶å¤¹è·¯å¾„ä¸å­˜åœ¨,è¯·é‡æ–°è¾“å…¥:");
 			} else if (file.isFile()) {
-				System.out.println("ÄúÊäÈëµÄÎÄ¼şÂ·¾¶,ÇëÊäÈëÎÄ¼ş¼ĞÂ·¾¶:");
+				System.out.println("æ‚¨è¾“å…¥çš„æ–‡ä»¶è·¯å¾„,è¯·è¾“å…¥æ–‡ä»¶å¤¹è·¯å¾„:");
 			} else {
 				return file;
 			}
